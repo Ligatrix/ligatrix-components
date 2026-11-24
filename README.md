@@ -4,6 +4,8 @@ Framework-free UI components for internal tools and dashboards: plain functions 
 
 ![CI](https://github.com/Ligatrix/ligatrix-components/actions/workflows/ci.yml/badge.svg)
 
+![The component gallery: buttons, status badges and metric tiles, with light and dark themes](docs/images/gallery.png)
+
 ## Why
 
 Most companies run on a handful of internal screens: an order queue, an approvals page, a stock report, a client status page. Those screens rarely justify a front-end framework and its build chain, yet they still need consistent tables, forms and status displays that work with a keyboard and a screen reader, and they must never render a customer's text as markup. This kit gives a server (or a browser) one function per component, returning a string you can send or insert, with escaping, ARIA and theming handled once.
