@@ -1,0 +1,48 @@
+{
+  "name": "@ligatrix/components",
+  "version": "1.0.0",
+  "description": "Framework-free UI components for internal tools and dashboards: pure functions that return accessible, escaped HTML strings, plus one themeable stylesheet.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.mjs",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.mjs"
+    },
+    "./styles.css": "./styles/ligatrix-components.css"
+  },
+  "files": [
+    "src",
+    "styles"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "node scripts/lint.mjs",
+    "gallery": "node scripts/gallery.mjs"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "html",
+    "dashboard",
+    "accessibility",
+    "design-tokens",
+    "ssr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ligatrix/ligatrix-components.git"
+  },
+  "homepage": "https://github.com/Ligatrix/ligatrix-components#readme",
+  "bugs": {
+    "url": "https://github.com/Ligatrix/ligatrix-components/issues"
+  }
+}
