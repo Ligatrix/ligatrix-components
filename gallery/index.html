@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ligatrix-components 1.0.0: gallery</title>
+<style>
+/*
+ * ligatrix-components: design tokens and component styles.
+ *
+ * Every visual decision is a custom property on :root. Override any of
+ * them (on :root or on a container) to theme the kit. Dark values apply
+ * with prefers-color-scheme: dark, and can be forced with
+ * data-theme="dark" or data-theme="light" on the html element.
+ */
+
+/*
+ * Tokens sit in a cascade layer, so any unlayered rule of yours, such as
+ * :root { --lx-color-accent: #0f766e; }, overrides them in light and dark
+ * alike, whatever its specificity.
+ */
+@layer ligatrix-tokens {
+  /* ---------- Tokens: scale (theme independent) ---------- */
+  :root {
+    /* Type */
+    --lx-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --lx-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --lx-text-xs: 0.75rem;
+    --lx-text-sm: 0.875rem;
+    --lx-text-md: 1rem;
+    --lx-text-lg: 1.125rem;
+    --lx-text-xl: 1.375rem;
+    --lx-text-2xl: 1.75rem;
+    --lx-text-3xl: 2.25rem;
+    --lx-leading-tight: 1.2;
+    --lx-leading-normal: 1.5;
+    --lx-weight-regular: 400;
+    --lx-weight-medium: 500;
+    --lx-weight-semibold: 600;
+
+    /* Spacing (4px base) */
+    --lx-space-1: 0.25rem;
+    --lx-space-2: 0.5rem;
+    --lx-space-3: 0.75rem;
+    --lx-space-4: 1rem;
+    --lx-space-5: 1.25rem;
+    --lx-space-6: 1.5rem;
+    --lx-space-8: 2rem;
+    --lx-space-10: 2.5rem;
+
+    /* Radius */
+    --lx-radius-sm: 4px;
+    --lx-radius-md: 8px;
+    --lx-radius-lg: 12px;
+    --lx-radius-full: 999px;
+
+    /* Elevation and motion */
+    --lx-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+    --lx-shadow-md: 0 2px 8px rgb(15 23 42 / 0.08);
+    --lx-focus-ring: 0 0 0 3px var(--lx-color-focus);
+    --lx-duration: 120ms;
+  }
+
+  /* ---------- Tokens: light colours (default) ---------- */
+  :root,
+  [data-theme="light"] {
+    color-scheme: light;
+    --lx-color-bg: #f6f6f4;
+    --lx-color-surface: #fcfcfb;
+    --lx-color-surface-raised: #ffffff;
+    --lx-color-surface-sunken: #efefec;
+    --lx-color-border: #dcdbd6;
+    --lx-color-border-strong: #b9b8b1;
+    --lx-color-text: #0b0b0b;
+    --lx-color-text-secondary: #52514e;
+    --lx-color-text-muted: #6b6a66;
+    --lx-color-text-inverse: #ffffff;
+
+    --lx-color-accent: #1d64bd;
+    --lx-color-accent-hover: #17539d;
+    --lx-color-accent-soft: #e3eefb;
+    --lx-color-focus: rgb(42 120 214 / 0.45);
+
+    --lx-color-info: #2a78d6;
+    --lx-color-info-soft: #e6f0fb;
+    --lx-color-success: #0a8a0a;
+    --lx-color-success-soft: #e5f4e5;
+    --lx-color-warning: #c98500;
+    --lx-color-warning-soft: #fdf3dc;
+    --lx-color-danger: #c62f2f;
+    --lx-color-danger-soft: #fbe7e7;
+    --lx-color-neutral: #8a8984;
+    --lx-color-neutral-soft: #eeeeeb;
+
+    --lx-color-chart-1: #2a78d6;
+    --lx-color-chart-muted: #9ab9e2;
+    --lx-color-chart-negative: #e34948;
+    --lx-color-chart-axis: #b9b8b1;
+  }
+
+  /* ---------- Tokens: dark colours ---------- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --lx-color-bg: #121211;
+      --lx-color-surface: #1a1a19;
+      --lx-color-surface-raised: #222221;
+      --lx-color-surface-sunken: #141413;
+      --lx-color-border: #34332f;
+      --lx-color-border-strong: #4a4943;
+      --lx-color-text: #f0efec;
+      --lx-color-text-secondary: #c3c2b7;
+      --lx-color-text-muted: #9c9b93;
+      --lx-color-text-inverse: #0b0b0b;
+      --lx-color-accent: #5b9bea;
+      --lx-color-accent-hover: #7cb0ef;
+      --lx-color-accent-soft: #1b2b40;
+      --lx-color-focus: rgb(91 155 234 / 0.5);
+      --lx-color-info: #3987e5;
+      --lx-color-info-soft: #172a42;
+      --lx-color-success: #0ca30c;
+      --lx-color-success-soft: #13301a;
+      --lx-color-warning: #fab219;
+      --lx-color-warning-soft: #3a2e12;
+      --lx-color-danger: #e66767;
+      --lx-color-danger-soft: #3d1c1c;
+      --lx-color-neutral: #8f8e86;
+      --lx-color-neutral-soft: #2a2a27;
+      --lx-color-chart-1: #3987e5;
+      --lx-color-chart-muted: #3f5f88;
+      --lx-color-chart-negative: #e66767;
+      --lx-color-chart-axis: #4a4943;
+      --lx-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+      --lx-shadow-md: 0 2px 8px rgb(0 0 0 / 0.45);
+    }
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --lx-color-bg: #121211;
+    --lx-color-surface: #1a1a19;
+    --lx-color-surface-raised: #222221;
+    --lx-color-surface-sunken: #141413;
+    --lx-color-border: #34332f;
+    --lx-color-border-strong: #4a4943;
+    --lx-color-text: #f0efec;
+    --lx-color-text-secondary: #c3c2b7;
+    --lx-color-text-muted: #9c9b93;
+    --lx-color-text-inverse: #0b0b0b;
+    --lx-color-accent: #5b9bea;
+    --lx-color-accent-hover: #7cb0ef;
+    --lx-color-accent-soft: #1b2b40;
+    --lx-color-focus: rgb(91 155 234 / 0.5);
+    --lx-color-info: #3987e5;
+    --lx-color-info-soft: #172a42;
+    --lx-color-success: #0ca30c;
+    --lx-color-success-soft: #13301a;
+    --lx-color-warning: #fab219;
+    --lx-color-warning-soft: #3a2e12;
+    --lx-color-danger: #e66767;
+    --lx-color-danger-soft: #3d1c1c;
+    --lx-color-neutral: #8f8e86;
+    --lx-color-neutral-soft: #2a2a27;
+    --lx-color-chart-1: #3987e5;
+    --lx-color-chart-muted: #3f5f88;
+    --lx-color-chart-negative: #e66767;
+    --lx-color-chart-axis: #4a4943;
+    --lx-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --lx-shadow-md: 0 2px 8px rgb(0 0 0 / 0.45);
+  }
+}
+
+/* ---------- Utilities ---------- */
+.lx-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lx-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Button ---------- */
+.lx-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--lx-radius-md);
+  font: inherit;
+  font-weight: var(--lx-weight-medium);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--lx-duration), border-color var(--lx-duration), color var(--lx-duration);
+}
+.lx-button:focus-visible { outline: none; box-shadow: var(--lx-focus-ring); }
+.lx-button--sm { padding: var(--lx-space-1) var(--lx-space-3); font-size: var(--lx-text-sm); min-height: 2rem; }
+.lx-button--md { padding: var(--lx-space-2) var(--lx-space-4); font-size: var(--lx-text-sm); min-height: 2.5rem; }
+.lx-button--lg { padding: var(--lx-space-3) var(--lx-space-5); font-size: var(--lx-text-md); min-height: 3rem; }
+.lx-button--primary { background: var(--lx-color-accent); color: var(--lx-color-text-inverse); }
+.lx-button--primary:hover { background: var(--lx-color-accent-hover); }
+.lx-button--secondary { background: var(--lx-color-surface-raised); color: var(--lx-color-text); border-color: var(--lx-color-border-strong); }
+.lx-button--secondary:hover { background: var(--lx-color-surface-sunken); }
+.lx-button--ghost { background: transparent; color: var(--lx-color-accent); }
+.lx-button--ghost:hover { background: var(--lx-color-accent-soft); }
+.lx-button--danger { background: var(--lx-color-danger); color: var(--lx-color-text-inverse); }
+.lx-button--danger:hover { filter: brightness(0.92); }
+.lx-button:disabled,
+.lx-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.lx-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: lx-spin 0.7s linear infinite;
+}
+@keyframes lx-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Badge ---------- */
+.lx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-space-1);
+  padding: 0.125rem var(--lx-space-2);
+  border-radius: var(--lx-radius-full);
+  font-size: var(--lx-text-xs);
+  font-weight: var(--lx-weight-medium);
+  line-height: var(--lx-leading-normal);
+  color: var(--lx-color-text);
+  background: var(--lx-color-neutral-soft);
+  white-space: nowrap;
+}
+.lx-badge__dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--lx-color-neutral); }
+.lx-badge--neutral { background: var(--lx-color-neutral-soft); }
+.lx-badge--info { background: var(--lx-color-info-soft); }
+.lx-badge--info .lx-badge__dot { background: var(--lx-color-info); }
+.lx-badge--success { background: var(--lx-color-success-soft); }
+.lx-badge--success .lx-badge__dot { background: var(--lx-color-success); }
+.lx-badge--warning { background: var(--lx-color-warning-soft); }
+.lx-badge--warning .lx-badge__dot { background: var(--lx-color-warning); }
+.lx-badge--danger { background: var(--lx-color-danger-soft); }
+.lx-badge--danger .lx-badge__dot { background: var(--lx-color-danger); }
+
+/* ---------- Alert ---------- */
+.lx-alert {
+  display: flex;
+  gap: var(--lx-space-3);
+  align-items: flex-start;
+  padding: var(--lx-space-3) var(--lx-space-4);
+  border: 1px solid var(--lx-color-border);
+  border-left-width: 4px;
+  border-radius: var(--lx-radius-md);
+  background: var(--lx-color-surface-raised);
+  color: var(--lx-color-text);
+  font-size: var(--lx-text-sm);
+}
+.lx-alert__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  font-size: var(--lx-text-xs);
+  font-weight: var(--lx-weight-semibold);
+  color: var(--lx-color-surface-raised);
+}
+.lx-alert__content { flex: 1; min-width: 0; }
+.lx-alert__title { margin: 0 0 var(--lx-space-1); font-weight: var(--lx-weight-semibold); }
+.lx-alert__message { color: var(--lx-color-text-secondary); }
+.lx-alert__message > :first-child { margin-top: 0; }
+.lx-alert__message > :last-child { margin-bottom: 0; }
+.lx-alert__dismiss {
+  flex: none;
+  border: 0;
+  background: transparent;
+  color: var(--lx-color-text-muted);
+  font-size: var(--lx-text-lg);
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--lx-radius-sm);
+}
+.lx-alert__dismiss:focus-visible { outline: none; box-shadow: var(--lx-focus-ring); }
+.lx-alert--info { border-left-color: var(--lx-color-info); }
+.lx-alert--info .lx-alert__icon { background: var(--lx-color-info); }
+.lx-alert--success { border-left-color: var(--lx-color-success); }
+.lx-alert--success .lx-alert__icon { background: var(--lx-color-success); }
+.lx-alert--warning { border-left-color: var(--lx-color-warning); }
+.lx-alert--warning .lx-alert__icon { background: var(--lx-color-warning); }
+.lx-alert--danger { border-left-color: var(--lx-color-danger); }
+.lx-alert--danger .lx-alert__icon { background: var(--lx-color-danger); }
+
+/* ---------- Card ---------- */
+.lx-card {
+  background: var(--lx-color-surface-raised);
+  border: 1px solid var(--lx-color-border);
+  border-radius: var(--lx-radius-lg);
+  box-shadow: var(--lx-shadow-sm);
+  color: var(--lx-color-text);
+  overflow: hidden;
+}
+.lx-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--lx-space-4);
+  padding: var(--lx-space-4) var(--lx-space-5) 0;
+}
+.lx-card__title { margin: 0; font-size: var(--lx-text-lg); font-weight: var(--lx-weight-semibold); line-height: var(--lx-leading-tight); }
+.lx-card__subtitle { margin: var(--lx-space-1) 0 0; font-size: var(--lx-text-sm); color: var(--lx-color-text-secondary); }
+.lx-card__actions { display: flex; gap: var(--lx-space-2); }
+.lx-card__body { padding: var(--lx-space-4) var(--lx-space-5); }
+.lx-card__body > :first-child { margin-top: 0; }
+.lx-card__body > :last-child { margin-bottom: 0; }
+.lx-card__footer {
+  padding: var(--lx-space-3) var(--lx-space-5);
+  border-top: 1px solid var(--lx-color-border);
+  background: var(--lx-color-surface);
+  font-size: var(--lx-text-sm);
+  color: var(--lx-color-text-secondary);
+}
+
+/* ---------- Metric tile ---------- */
+.lx-metric {
+  display: grid;
+  align-content: start;
+  gap: var(--lx-space-1);
+  padding: var(--lx-space-4) var(--lx-space-5);
+  background: var(--lx-color-surface-raised);
+  border: 1px solid var(--lx-color-border);
+  border-radius: var(--lx-radius-lg);
+  color: var(--lx-color-text);
+}
+.lx-metric p { margin: 0; }
+.lx-metric__label { font-size: var(--lx-text-sm); color: var(--lx-color-text-secondary); }
+.lx-metric__value {
+  font-size: var(--lx-text-2xl);
+  font-weight: var(--lx-weight-semibold);
+  line-height: var(--lx-leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+.lx-metric__delta { font-size: var(--lx-text-sm); font-weight: var(--lx-weight-medium); font-variant-numeric: tabular-nums; }
+.lx-metric__delta--good { color: var(--lx-color-success); }
+.lx-metric__delta--bad { color: var(--lx-color-danger); }
+.lx-metric__delta--neutral { color: var(--lx-color-text-muted); }
+.lx-metric__period { font-weight: var(--lx-weight-regular); color: var(--lx-color-text-muted); }
+.lx-metric__trend { margin-top: var(--lx-space-2); color: var(--lx-color-chart-muted); }
+.lx-metric__trend .lx-sparkline__point { color: var(--lx-color-chart-1); }
+
+/* ---------- Data table ---------- */
+.lx-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--lx-color-border);
+  border-radius: var(--lx-radius-lg);
+  background: var(--lx-color-surface-raised);
+}
+.lx-table-wrap:focus-visible { outline: none; box-shadow: var(--lx-focus-ring); }
+.lx-table { width: 100%; border-collapse: collapse; font-size: var(--lx-text-sm); color: var(--lx-color-text); }
+.lx-table caption { padding: var(--lx-space-3) var(--lx-space-4); text-align: left; font-weight: var(--lx-weight-semibold); }
+.lx-table th,
+.lx-table td { padding: var(--lx-space-3) var(--lx-space-4); border-bottom: 1px solid var(--lx-color-border); text-align: left; vertical-align: middle; }
+.lx-table--compact th,
+.lx-table--compact td { padding: var(--lx-space-2) var(--lx-space-3); }
+.lx-table thead th {
+  background: var(--lx-color-surface);
+  color: var(--lx-color-text-secondary);
+  font-size: var(--lx-text-xs);
+  font-weight: var(--lx-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.lx-table tbody th { font-weight: var(--lx-weight-medium); }
+.lx-table tbody tr:last-child > * { border-bottom: 0; }
+.lx-table tbody tr:hover { background: var(--lx-color-surface); }
+.lx-table .lx-num { text-align: right; }
+.lx-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-space-1);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.lx-table__sort:focus-visible { outline: none; box-shadow: var(--lx-focus-ring); border-radius: var(--lx-radius-sm); }
+.lx-table__sort-icon { width: 0.6em; height: 0.9em; position: relative; opacity: 0.45; }
+.lx-table__sort-icon::before,
+.lx-table__sort-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  border-left: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+}
+.lx-table__sort-icon::before { top: 0; border-bottom: 0.35em solid currentColor; }
+.lx-table__sort-icon::after { bottom: 0; border-top: 0.35em solid currentColor; }
+.lx-table__sort-icon[data-state="ascending"],
+.lx-table__sort-icon[data-state="descending"] { opacity: 1; color: var(--lx-color-accent); }
+.lx-table__sort-icon[data-state="ascending"]::after,
+.lx-table__sort-icon[data-state="descending"]::before { opacity: 0.25; }
+.lx-table__empty td { padding: var(--lx-space-8) var(--lx-space-4); text-align: center; color: var(--lx-color-text-muted); }
+
+/* ---------- Form field and select ---------- */
+.lx-field { display: grid; align-content: start; gap: var(--lx-space-1); font-size: var(--lx-text-sm); color: var(--lx-color-text); }
+.lx-field__label { font-weight: var(--lx-weight-medium); }
+.lx-field__required { margin-left: 0.15em; color: var(--lx-color-danger); }
+.lx-field__hint { margin: 0; color: var(--lx-color-text-muted); }
+.lx-field__error { margin: 0; color: var(--lx-color-danger); font-weight: var(--lx-weight-medium); }
+.lx-input,
+.lx-select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 2.5rem;
+  padding: var(--lx-space-2) var(--lx-space-3);
+  border: 1px solid var(--lx-color-border-strong);
+  border-radius: var(--lx-radius-md);
+  background: var(--lx-color-surface-raised);
+  color: var(--lx-color-text);
+  font: inherit;
+}
+.lx-input:focus,
+.lx-select:focus { outline: none; border-color: var(--lx-color-accent); box-shadow: var(--lx-focus-ring); }
+.lx-input:disabled,
+.lx-select:disabled { background: var(--lx-color-surface-sunken); color: var(--lx-color-text-muted); cursor: not-allowed; }
+.lx-field--invalid .lx-input,
+.lx-field--invalid .lx-select { border-color: var(--lx-color-danger); }
+textarea.lx-input { resize: vertical; }
+
+/* ---------- Timeline ---------- */
+.lx-timeline { list-style: none; margin: 0; padding: 0; color: var(--lx-color-text); font-size: var(--lx-text-sm); }
+.lx-timeline__item { position: relative; display: flex; gap: var(--lx-space-3); padding-bottom: var(--lx-space-5); }
+.lx-timeline__item:last-child { padding-bottom: 0; }
+.lx-timeline__item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 0.4375rem;
+  top: 1.25rem;
+  bottom: 0.125rem;
+  width: 2px;
+  background: var(--lx-color-border);
+}
+.lx-timeline__item--done:not(:last-child)::before { background: var(--lx-color-success); }
+.lx-timeline__marker {
+  flex: none;
+  box-sizing: border-box;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+  border-radius: 50%;
+  border: 2px solid var(--lx-color-border-strong);
+  background: var(--lx-color-surface-raised);
+}
+.lx-timeline__item--done .lx-timeline__marker { border-color: var(--lx-color-success); background: var(--lx-color-success); }
+.lx-timeline__item--current .lx-timeline__marker { border-color: var(--lx-color-accent); box-shadow: inset 0 0 0 3px var(--lx-color-surface-raised); background: var(--lx-color-accent); }
+.lx-timeline__item--failed .lx-timeline__marker { border-color: var(--lx-color-danger); background: var(--lx-color-danger); }
+.lx-timeline__content p { margin: 0; }
+.lx-timeline__title { font-weight: var(--lx-weight-medium); }
+.lx-timeline__item--upcoming .lx-timeline__title { color: var(--lx-color-text-secondary); }
+.lx-timeline__time { display: block; color: var(--lx-color-text-muted); font-size: var(--lx-text-xs); font-variant-numeric: tabular-nums; }
+.lx-timeline__description { margin-top: var(--lx-space-1) !important; color: var(--lx-color-text-secondary); }
+
+/* ---------- Pagination ---------- */
+.lx-pagination__list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lx-space-1); list-style: none; margin: 0; padding: 0; }
+.lx-pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lx-space-1);
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  box-sizing: border-box;
+  padding: 0 var(--lx-space-2);
+  border-radius: var(--lx-radius-md);
+  color: var(--lx-color-text);
+  font-size: var(--lx-text-sm);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+a.lx-pagination__link:hover { background: var(--lx-color-surface-sunken); }
+a.lx-pagination__link:focus-visible { outline: none; box-shadow: var(--lx-focus-ring); }
+.lx-pagination__link[aria-current="page"] { background: var(--lx-color-accent); color: var(--lx-color-text-inverse); font-weight: var(--lx-weight-semibold); }
+.lx-pagination__link[aria-disabled="true"] { color: var(--lx-color-text-muted); opacity: 0.6; }
+.lx-pagination__gap { padding: 0 var(--lx-space-1); color: var(--lx-color-text-muted); }
+
+/* ---------- Empty state ---------- */
+.lx-empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--lx-space-2);
+  padding: var(--lx-space-10) var(--lx-space-6);
+  text-align: center;
+  color: var(--lx-color-text);
+  border: 1px dashed var(--lx-color-border-strong);
+  border-radius: var(--lx-radius-lg);
+}
+.lx-empty__icon { color: var(--lx-color-text-muted); }
+.lx-empty__title { margin: 0; font-size: var(--lx-text-md); font-weight: var(--lx-weight-semibold); }
+.lx-empty__message { margin: 0; max-width: 36ch; font-size: var(--lx-text-sm); color: var(--lx-color-text-secondary); }
+.lx-empty__action { margin-top: var(--lx-space-2); }
+
+/* ---------- Charts ---------- */
+.lx-sparkline { display: block; overflow: visible; color: var(--lx-color-chart-1); }
+.lx-sparkline__area { opacity: 0.12; }
+.lx-sparkline__empty { color: var(--lx-color-chart-axis); }
+.lx-chart { margin: 0; color: var(--lx-color-text); }
+.lx-chart__title { margin-bottom: var(--lx-space-2); font-size: var(--lx-text-sm); font-weight: var(--lx-weight-semibold); }
+.lx-chart__svg { display: block; max-width: 100%; height: auto; overflow: visible; }
+.lx-chart__label { fill: var(--lx-color-text-secondary); font-size: 12px; font-family: var(--lx-font-sans); }
+.lx-chart__value { fill: var(--lx-color-text); font-size: 12px; font-family: var(--lx-font-sans); font-variant-numeric: tabular-nums; }
+.lx-chart__bar { color: var(--lx-color-chart-1); }
+.lx-chart__bar--negative { color: var(--lx-color-chart-negative); }
+.lx-chart__axis { color: var(--lx-color-chart-axis); }
+.lx-chart__row:hover .lx-chart__bar { opacity: 0.8; }
+.lx-chart__empty { margin: 0; padding: var(--lx-space-6); text-align: center; color: var(--lx-color-text-muted); font-size: var(--lx-text-sm); }
+.lx-chart__table { margin-top: var(--lx-space-3); border-collapse: collapse; font-size: var(--lx-text-sm); }
+.lx-chart__table th,
+.lx-chart__table td { padding: var(--lx-space-1) var(--lx-space-3); border-bottom: 1px solid var(--lx-color-border); text-align: left; }
+.lx-chart__table .lx-num { text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-spinner { animation-duration: 2s; }
+  .lx-button { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .lx-badge__dot,
+  .lx-timeline__marker { forced-color-adjust: none; border: 1px solid CanvasText; }
+  .lx-chart__bar { color: CanvasText; }
+}
+
+body { margin: 0; background: var(--lx-color-bg); color: var(--lx-color-text); font-family: var(--lx-font-sans); line-height: var(--lx-leading-normal); }
+.g-header { padding: var(--lx-space-8) var(--lx-space-6) var(--lx-space-6); max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: var(--lx-space-4); flex-wrap: wrap; }
+.g-header h1 { margin: 0; font-size: var(--lx-text-3xl); line-height: var(--lx-leading-tight); }
+.g-header p { margin: var(--lx-space-2) 0 0; color: var(--lx-color-text-secondary); max-width: 60ch; }
+.g-layout { max-width: 1100px; margin: 0 auto; padding: 0 var(--lx-space-6) var(--lx-space-10); display: grid; grid-template-columns: 200px 1fr; gap: var(--lx-space-8); }
+.g-nav { position: sticky; top: var(--lx-space-4); align-self: start; font-size: var(--lx-text-sm); }
+.g-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--lx-space-1); }
+.g-nav a { color: var(--lx-color-text-secondary); text-decoration: none; display: block; padding: var(--lx-space-1) var(--lx-space-2); border-radius: var(--lx-radius-sm); }
+.g-nav a:hover { color: var(--lx-color-text); background: var(--lx-color-surface-sunken); }
+.g-section { padding: var(--lx-space-6) 0; border-top: 1px solid var(--lx-color-border); }
+.g-section h2 { margin: 0; font-size: var(--lx-text-xl); }
+.g-desc { margin: var(--lx-space-1) 0 var(--lx-space-4); color: var(--lx-color-text-secondary); font-size: var(--lx-text-sm); max-width: 70ch; }
+.g-sub { margin: var(--lx-space-6) 0 var(--lx-space-3); font-size: var(--lx-text-md); }
+.g-demo { background: var(--lx-color-surface); border: 1px solid var(--lx-color-border); border-radius: var(--lx-radius-lg); padding: var(--lx-space-5); }
+.g-row { display: flex; flex-wrap: wrap; gap: var(--lx-space-3); align-items: center; }
+.g-row + .g-row { margin-top: var(--lx-space-4); }
+.g-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--lx-space-4); }
+.g-stack { display: grid; gap: var(--lx-space-3); }
+.g-stack--wide { gap: var(--lx-space-8); }
+.g-theme { display: flex; gap: var(--lx-space-2); }
+.g-theme [aria-pressed="true"] { background: var(--lx-color-accent-soft); border-color: var(--lx-color-accent); }
+.g-footer { max-width: 1100px; margin: 0 auto; padding: var(--lx-space-6); color: var(--lx-color-text-muted); font-size: var(--lx-text-sm); border-top: 1px solid var(--lx-color-border); }
+.g-footer a { color: var(--lx-color-accent); }
+@media (max-width: 760px) { .g-layout { grid-template-columns: 1fr; } .g-nav { position: static; } }
+</style>
+</head>
+<body>
+<header class="g-header">
+<div>
+<h1>ligatrix-components</h1>
+<p>Every component in the kit, rendered by <code>npm run gallery</code> from the same functions you import. Sample data is for Corvane Supply Co., a fictional distributor used in this demo.</p>
+</div>
+<div class="g-theme" role="group" aria-label="Colour theme"><button class="lx-button lx-button--secondary lx-button--sm" type="button" data-set-theme="system" aria-pressed="true"><span class="lx-button__label">System</span></button><button class="lx-button lx-button--secondary lx-button--sm" type="button" data-set-theme="light" aria-pressed="false"><span class="lx-button__label">Light</span></button><button class="lx-button lx-button--secondary lx-button--sm" type="button" data-set-theme="dark" aria-pressed="false"><span class="lx-button__label">Dark</span></button></div>
+</header>
+<div class="g-layout">
+<nav class="g-nav" aria-label="Components"><ul><li><a href="#button">Button</a></li><li><a href="#badge">Badge</a></li><li><a href="#metric-tile">Metric tile</a></li><li><a href="#data-table">Data table</a></li><li><a href="#form-field">Form field</a></li><li><a href="#select">Select</a></li><li><a href="#timeline">Status timeline</a></li><li><a href="#alert">Alert</a></li><li><a href="#card">Card</a></li><li><a href="#pagination">Pagination</a></li><li><a href="#empty-state">Empty state</a></li><li><a href="#sparkline">Sparkline</a></li><li><a href="#bar-chart">Bar chart</a></li></ul></nav>
+<main>
+<section class="g-section" id="button" aria-labelledby="button-h"><h2 id="button-h">Button</h2><p class="g-desc">Four variants and three sizes. A button with href renders a link; disabled and loading states set the right attributes.</p><div class="g-demo"><div class="g-row"><button class="lx-button lx-button--primary lx-button--md" type="button"><span class="lx-button__label">Approve order</span></button><button class="lx-button lx-button--secondary lx-button--md" type="button"><span class="lx-button__label">Export CSV</span></button><button class="lx-button lx-button--ghost lx-button--md" type="button"><span class="lx-button__label">View history</span></button><button class="lx-button lx-button--danger lx-button--md" type="button"><span class="lx-button__label">Cancel order</span></button></div><div class="g-row"><button class="lx-button lx-button--secondary lx-button--sm" type="button"><span class="lx-button__label">Small</span></button><button class="lx-button lx-button--primary lx-button--lg" type="button"><span class="lx-button__label">Large</span></button><button class="lx-button lx-button--primary lx-button--md is-loading" type="button" disabled aria-busy="true"><span class="lx-spinner" aria-hidden="true"></span><span class="lx-button__label">Saving</span></button><button class="lx-button lx-button--secondary lx-button--md" type="button" disabled><span class="lx-button__label">Disabled</span></button><a class="lx-button lx-button--ghost lx-button--md" href="#data-table"><span class="lx-button__label">Open as link</span></a></div></div></section>
+<section class="g-section" id="badge" aria-labelledby="badge-h"><h2 id="badge-h">Badge</h2><p class="g-desc">Status labels. The word carries the meaning; the dot and tint only reinforce it.</p><div class="g-demo"><div class="g-row"><span class="lx-badge lx-badge--neutral"><span class="lx-badge__dot" aria-hidden="true"></span>Draft</span><span class="lx-badge lx-badge--info"><span class="lx-badge__dot" aria-hidden="true"></span>Awaiting approval</span><span class="lx-badge lx-badge--success"><span class="lx-badge__dot" aria-hidden="true"></span>Shipped</span><span class="lx-badge lx-badge--warning"><span class="lx-badge__dot" aria-hidden="true"></span>On hold</span><span class="lx-badge lx-badge--danger"><span class="lx-badge__dot" aria-hidden="true"></span>Cancelled</span><span class="lx-badge lx-badge--info">No dot</span></div></div></section>
+<section class="g-section" id="metric-tile" aria-labelledby="metric-tile-h"><h2 id="metric-tile-h">Metric tile</h2><p class="g-desc">A headline value with a signed change. Colour follows direction and whether up is good; the direction is also written out for screen readers.</p><div class="g-demo"><div class="g-grid"><div class="lx-metric"><p class="lx-metric__label">Open orders</p><p class="lx-metric__value">1,284</p><p class="lx-metric__delta lx-metric__delta--good" data-direction="up"><span aria-hidden="true">▲ +6.4%</span><span class="lx-sr-only">Up 6.4%</span> <span class="lx-metric__period">vs last week</span></p><div class="lx-metric__trend"><svg class="lx-sparkline" viewBox="0 0 96 28" width="96" height="28" role="img" aria-label="Open orders trend: 12 points, from 980 to 1,284, low 980, high 1,284" focusable="false"><path class="lx-sparkline__area" d="M3 28 L3 25 L11.18 22.83 L19.36 19.21 L27.55 20.66 L35.73 14.87 L43.91 12.7 L52.09 14.14 L60.27 9.8 L68.45 8.36 L76.64 6.18 L84.82 4.59 L93 3 L93 28 Z" fill="currentColor" stroke="none"/><path class="lx-sparkline__line" d="M3 25 L11.18 22.83 L19.36 19.21 L27.55 20.66 L35.73 14.87 L43.91 12.7 L52.09 14.14 L60.27 9.8 L68.45 8.36 L76.64 6.18 L84.82 4.59 L93 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="lx-sparkline__point" cx="93" cy="3" r="2.5" fill="currentColor"/></svg></div></div><div class="lx-metric"><p class="lx-metric__label">Revenue this month</p><p class="lx-metric__value">$4.2M</p><p class="lx-metric__delta lx-metric__delta--bad" data-direction="down"><span aria-hidden="true">▼ −3.1%</span><span class="lx-sr-only">Down 3.1%</span> <span class="lx-metric__period">vs October</span></p><div class="lx-metric__trend"><svg class="lx-sparkline" viewBox="0 0 96 28" width="96" height="28" role="img" aria-label="Revenue this month trend: 8 points, from 4.6 to 4.2, low 4.2, high 4.6" focusable="false"><path class="lx-sparkline__area" d="M3 28 L3 3 L15.86 8.5 L28.71 5.75 L41.57 14 L54.43 15.1 L67.29 19.5 L80.14 22.25 L93 25 L93 28 Z" fill="currentColor" stroke="none"/><path class="lx-sparkline__line" d="M3 3 L15.86 8.5 L28.71 5.75 L41.57 14 L54.43 15.1 L67.29 19.5 L80.14 22.25 L93 25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="lx-sparkline__point" cx="93" cy="25" r="2.5" fill="currentColor"/></svg></div></div><div class="lx-metric"><p class="lx-metric__label">Late shipments</p><p class="lx-metric__value">37</p><p class="lx-metric__delta lx-metric__delta--good" data-direction="down"><span aria-hidden="true">▼ −12%</span><span class="lx-sr-only">Down 12%</span> <span class="lx-metric__period">vs last week</span></p></div><div class="lx-metric"><p class="lx-metric__label">Average lines per order</p><p class="lx-metric__value">11.8</p><p class="lx-metric__delta lx-metric__delta--neutral" data-direction="flat"><span aria-hidden="true">▬ 0%</span><span class="lx-sr-only">No change</span> <span class="lx-metric__period">vs last week</span></p></div></div></div></section>
+<section class="g-section" id="data-table" aria-labelledby="data-table-h"><h2 id="data-table-h">Data table</h2><p class="g-desc">Purchase orders for Corvane Supply Co., a fictional distributor used in this demo. Numeric columns are right-aligned with tabular figures; the sorted column sets aria-sort; missing values read as &quot;Empty&quot;.</p><div class="g-demo"><div class="lx-table-wrap" role="region" aria-label="Purchase orders" tabindex="0"><table class="lx-table lx-table--comfortable"><caption>Purchase orders</caption><thead><tr><th scope="col" class="lx-table__sortable" aria-sort="none"><a class="lx-table__sort" href="?sort=id&amp;dir=ascending">Order<span class="lx-table__sort-icon" data-state="none" aria-hidden="true"></span></a></th><th scope="col" class="lx-table__sortable" aria-sort="none"><a class="lx-table__sort" href="?sort=depot&amp;dir=ascending">Depot<span class="lx-table__sort-icon" data-state="none" aria-hidden="true"></span></a></th><th scope="col">Status</th><th scope="col" class="lx-num lx-table__sortable" aria-sort="none"><a class="lx-table__sort" href="?sort=lines&amp;dir=ascending">Lines<span class="lx-table__sort-icon" data-state="none" aria-hidden="true"></span></a></th><th scope="col" class="lx-num lx-table__sortable" aria-sort="descending"><a class="lx-table__sort" href="?sort=value&amp;dir=ascending">Value<span class="lx-table__sort-icon" data-state="descending" aria-hidden="true"></span></a></th><th scope="col" class="lx-table__sortable" aria-sort="none"><a class="lx-table__sort" href="?sort=due&amp;dir=ascending">Due<span class="lx-table__sort-icon" data-state="none" aria-hidden="true"></span></a></th></tr></thead><tbody><tr data-key="PO-10482"><th scope="row">PO-10482</th><td>North depot</td><td><span class="lx-badge lx-badge--success"><span class="lx-badge__dot" aria-hidden="true"></span>Shipped</span></td><td class="lx-num">14</td><td class="lx-num">$18,240.5</td><td>2026-11-26</td></tr><tr data-key="PO-10479"><th scope="row">PO-10479</th><td>Harbour depot</td><td><span class="lx-badge lx-badge--info"><span class="lx-badge__dot" aria-hidden="true"></span>Awaiting approval</span></td><td class="lx-num">6</td><td class="lx-num">$4,310</td><td>2026-11-27</td></tr><tr data-key="PO-10475"><th scope="row">PO-10475</th><td>East depot</td><td><span class="lx-badge lx-badge--warning"><span class="lx-badge__dot" aria-hidden="true"></span>On hold</span></td><td class="lx-num">22</td><td class="lx-num">$61,200</td><td>2026-11-25</td></tr><tr data-key="PO-10471"><th scope="row">PO-10471</th><td>North depot</td><td><span class="lx-badge lx-badge--neutral"><span class="lx-badge__dot" aria-hidden="true"></span>Draft</span></td><td class="lx-num">3</td><td class="lx-num">$890.25</td><td><span aria-hidden="true">—</span><span class="lx-sr-only">Empty</span></td></tr><tr data-key="PO-10466"><th scope="row">PO-10466</th><td>Harbour depot</td><td><span class="lx-badge lx-badge--danger"><span class="lx-badge__dot" aria-hidden="true"></span>Cancelled</span></td><td class="lx-num">9</td><td class="lx-num">$7,725</td><td>2026-11-22</td></tr></tbody></table></div><h3 class="g-sub">Empty</h3><div class="lx-table-wrap" role="region" aria-label="Returns this week" tabindex="0"><table class="lx-table lx-table--comfortable"><caption>Returns this week</caption><thead><tr><th scope="col">Return</th><th scope="col">Reason</th><th scope="col" class="lx-num">Value</th></tr></thead><tbody><tr class="lx-table__empty"><td colspan="3"><span class="lx-table__empty-text">No returns logged this week.</span></td></tr></tbody></table></div></div></section>
+<section class="g-section" id="form-field" aria-labelledby="form-field-h"><h2 id="form-field-h">Form field</h2><p class="g-desc">Labels are always visible and linked. Hints and errors are wired with aria-describedby; required fields are marked in text as well as with an asterisk.</p><div class="g-demo"><div class="g-grid"><div class="lx-field"><label class="lx-field__label" for="lx-field-1">Supplier reference</label><p class="lx-field__hint" id="lx-field-1-hint">As printed on the supplier&#39;s invoice.</p><input class="lx-input" id="lx-field-1" name="ref" placeholder="e.g. INV-2291" aria-describedby="lx-field-1-hint" type="text"></div><div class="lx-field lx-field--invalid"><label class="lx-field__label" for="lx-field-2">Contact email<span class="lx-field__required" aria-hidden="true">*</span><span class="lx-sr-only"> (required)</span></label><input class="lx-input" id="lx-field-2" name="email" required aria-invalid="true" aria-describedby="lx-field-2-error" type="email" value="dana@corvane"><p class="lx-field__error" id="lx-field-2-error"><span aria-hidden="true">! </span>Enter a full email address, like dana@corvane.example.</p></div><div class="lx-field"><label class="lx-field__label" for="lx-field-3">Quantity<span class="lx-field__required" aria-hidden="true">*</span><span class="lx-sr-only"> (required)</span></label><input class="lx-input" id="lx-field-3" name="qty" required type="number" value="24"></div><div class="lx-field"><label class="lx-field__label" for="lx-field-4">Notes for the warehouse</label><p class="lx-field__hint" id="lx-field-4-hint">Visible to the picking team.</p><textarea class="lx-input" id="lx-field-4" name="notes" aria-describedby="lx-field-4-hint" rows="3"></textarea></div></div></div></section>
+<section class="g-section" id="select" aria-labelledby="select-h"><h2 id="select-h">Select</h2><p class="g-desc">A native select, so keyboard and screen reader support come from the platform. Supports placeholders, groups, disabled options and errors.</p><div class="g-demo"><div class="g-grid"><div class="lx-field"><label class="lx-field__label" for="lx-select-5">Depot<span class="lx-field__required" aria-hidden="true">*</span><span class="lx-sr-only"> (required)</span></label><select class="lx-select" id="lx-select-5" name="depot" required><option value="" selected disabled>Choose a depot</option><option value="North depot">North depot</option><option value="East depot">East depot</option><option value="Harbour depot">Harbour depot</option><option value="west" disabled>West depot (closed)</option></select></div><div class="lx-field"><label class="lx-field__label" for="lx-select-6">Approver</label><p class="lx-field__hint" id="lx-select-6-hint">Orders over $10,000 need a second approver.</p><select class="lx-select" id="lx-select-6" name="approver" aria-describedby="lx-select-6-hint"><optgroup label="Purchasing"><option value="dana" selected>Dana</option><option value="sam">Sam</option></optgroup><optgroup label="Finance"><option value="priya">Priya</option></optgroup></select></div><div class="lx-field lx-field--invalid"><label class="lx-field__label" for="lx-select-7">Carrier</label><select class="lx-select" id="lx-select-7" name="carrier" aria-invalid="true" aria-describedby="lx-select-7-error"><option value="" selected>Choose a carrier</option><option value="Road freight">Road freight</option><option value="Rail freight">Rail freight</option></select><p class="lx-field__error" id="lx-select-7-error"><span aria-hidden="true">! </span>Choose a carrier before booking.</p></div></div></div></section>
+<section class="g-section" id="timeline" aria-labelledby="timeline-h"><h2 id="timeline-h">Status timeline</h2><p class="g-desc">An ordered list of steps. The current step carries aria-current; each state is written out for screen readers.</p><div class="g-demo"><ol class="lx-timeline" aria-label="Order PO-10475 progress"><li class="lx-timeline__item lx-timeline__item--done"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Order raised <span class="lx-sr-only">(Completed)</span></p><time class="lx-timeline__time" datetime="2026-11-20T09:14:00.000Z">2026-11-20 09:14 UTC</time><p class="lx-timeline__description">Raised by Sam from the East depot reorder list.</p></div></li><li class="lx-timeline__item lx-timeline__item--done"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Approved <span class="lx-sr-only">(Completed)</span></p><time class="lx-timeline__time" datetime="2026-11-20T15:02:00.000Z">2026-11-20 15:02 UTC</time><p class="lx-timeline__description">Approver: Dana.</p></div></li><li class="lx-timeline__item lx-timeline__item--failed"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Credit check <span class="lx-sr-only">(Failed)</span></p><time class="lx-timeline__time" datetime="2026-11-21T08:40:00.000Z">2026-11-21 08:40 UTC</time><p class="lx-timeline__description">Account over limit; placed on hold.</p></div></li><li class="lx-timeline__item lx-timeline__item--current" aria-current="step"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Awaiting finance review <span class="lx-sr-only">(In progress)</span></p><span class="lx-timeline__time">Since 21 Nov, 8:45 AM UTC</span></div></li><li class="lx-timeline__item lx-timeline__item--upcoming"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Picked and packed <span class="lx-sr-only">(Not started)</span></p></div></li><li class="lx-timeline__item lx-timeline__item--upcoming"><span class="lx-timeline__marker" aria-hidden="true"></span><div class="lx-timeline__content"><p class="lx-timeline__title">Shipped <span class="lx-sr-only">(Not started)</span></p></div></li></ol></div></section>
+<section class="g-section" id="alert" aria-labelledby="alert-h"><h2 id="alert-h">Alert</h2><p class="g-desc">Info and success are polite (role=status); warning and danger interrupt (role=alert).</p><div class="g-demo"><div class="g-stack"><div class="lx-alert lx-alert--info" role="status"><span class="lx-alert__icon" aria-hidden="true">i</span><div class="lx-alert__content"><p class="lx-alert__title">Stock count scheduled</p><div class="lx-alert__message">The East depot is counted on Friday; orders from it ship on Monday.</div></div></div><div class="lx-alert lx-alert--success" role="status"><span class="lx-alert__icon" aria-hidden="true">✓</span><div class="lx-alert__content"><div class="lx-alert__message">PO-10482 was shipped and the customer notified.</div></div></div><div class="lx-alert lx-alert--warning" role="alert"><span class="lx-alert__icon" aria-hidden="true">!</span><div class="lx-alert__content"><p class="lx-alert__title">Approval overdue</p><div class="lx-alert__message">PO-10479 has waited more than 24 hours for approval.</div></div><button type="button" class="lx-alert__dismiss" aria-label="Dismiss"><span aria-hidden="true">×</span></button></div><div class="lx-alert lx-alert--danger" role="alert"><span class="lx-alert__icon" aria-hidden="true">×</span><div class="lx-alert__content"><p class="lx-alert__title">Sync failed</p><div class="lx-alert__message">The carrier feed returned an error. Tracking numbers may be out of date.</div></div></div></div></div></section>
+<section class="g-section" id="card" aria-labelledby="card-h"><h2 id="card-h">Card</h2><p class="g-desc">A titled surface. Text options are escaped; the *Html options take other components.</p><div class="g-demo"><div class="g-grid"><section class="lx-card" id="lx-card-8" aria-labelledby="lx-card-8-title"><header class="lx-card__header"><div><h2 class="lx-card__title" id="lx-card-8-title">Reorder suggestions</h2><p class="lx-card__subtitle">North depot</p></div><div class="lx-card__actions"><button class="lx-button lx-button--secondary lx-button--sm" type="button"><span class="lx-button__label">Review</span></button></div></header><div class="lx-card__body"><p>Twelve products are below their reorder point. The suggested order totals $8,410.</p></div><footer class="lx-card__footer">Updated 9:30 AM</footer></section><section class="lx-card" id="lx-card-9" aria-labelledby="lx-card-9-title"><header class="lx-card__header"><div><h2 class="lx-card__title" id="lx-card-9-title">Depot health</h2></div></header><div class="lx-card__body"><div class="g-row"><span class="lx-badge lx-badge--success"><span class="lx-badge__dot" aria-hidden="true"></span>North: normal</span><span class="lx-badge lx-badge--warning"><span class="lx-badge__dot" aria-hidden="true"></span>East: on hold</span><span class="lx-badge lx-badge--success"><span class="lx-badge__dot" aria-hidden="true"></span>Harbour: normal</span></div></div></section></div></div></section>
+<section class="g-section" id="pagination" aria-labelledby="pagination-h"><h2 id="pagination-h">Pagination</h2><p class="g-desc">A labelled nav with the current page marked. Gaps collapse long ranges; the first and last pages are always reachable.</p><div class="g-demo"><div class="g-stack"><nav class="lx-pagination" aria-label="Pagination"><ul class="lx-pagination__list"><li><span class="lx-pagination__link lx-pagination__step" aria-disabled="true"><span aria-hidden="true">‹</span> Previous</span></li><li><a class="lx-pagination__link" aria-current="page" href="#pagination"><span class="lx-sr-only">Page </span>1</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>2</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>3</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>4</a></li><li><a class="lx-pagination__link lx-pagination__step" href="#pagination" rel="next">Next <span aria-hidden="true">›</span></a></li></ul></nav><nav class="lx-pagination" aria-label="Pagination"><ul class="lx-pagination__list"><li><a class="lx-pagination__link lx-pagination__step" href="#pagination" rel="prev"><span aria-hidden="true">‹</span> Previous</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>1</a></li><li><span class="lx-pagination__gap" aria-hidden="true">…</span></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>5</a></li><li><a class="lx-pagination__link" aria-current="page" href="#pagination"><span class="lx-sr-only">Page </span>6</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>7</a></li><li><span class="lx-pagination__gap" aria-hidden="true">…</span></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>24</a></li><li><a class="lx-pagination__link lx-pagination__step" href="#pagination" rel="next">Next <span aria-hidden="true">›</span></a></li></ul></nav><nav class="lx-pagination" aria-label="Pagination"><ul class="lx-pagination__list"><li><a class="lx-pagination__link lx-pagination__step" href="#pagination" rel="prev"><span aria-hidden="true">‹</span> Previous</a></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>1</a></li><li><span class="lx-pagination__gap" aria-hidden="true">…</span></li><li><a class="lx-pagination__link" href="#pagination"><span class="lx-sr-only">Page </span>23</a></li><li><a class="lx-pagination__link" aria-current="page" href="#pagination"><span class="lx-sr-only">Page </span>24</a></li><li><span class="lx-pagination__link lx-pagination__step" aria-disabled="true">Next <span aria-hidden="true">›</span></span></li></ul></nav></div></div></section>
+<section class="g-section" id="empty-state" aria-labelledby="empty-state-h"><h2 id="empty-state-h">Empty state</h2><p class="g-desc">What a view shows when there is nothing in it yet, with the next useful step.</p><div class="g-demo"><div class="lx-empty"><svg class="lx-empty__icon" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4v10l-9 4-9-4z M3 7l9 4 9-4 M12 11v10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><h3 class="lx-empty__title">No supplier invoices yet</h3><p class="lx-empty__message">Invoices appear here once a supplier sends one or you upload a PDF.</p><div class="lx-empty__action"><button class="lx-button lx-button--secondary lx-button--md" type="button"><span class="lx-button__label">Upload invoice</span></button></div></div></div></section>
+<section class="g-section" id="sparkline" aria-labelledby="sparkline-h"><h2 id="sparkline-h">Sparkline</h2><p class="g-desc">A compact trend with the latest point marked. Gaps in the data stay gaps. The accessible name states the range in words.</p><div class="g-demo"><div class="g-row"><svg class="lx-sparkline" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Daily orders: 12 points, from 12 to 29, low 12, high 29" focusable="false"><path class="lx-sparkline__area" d="M3 32 L3 29 L13.36 25.94 L23.73 27.47 L34.09 21.35 L44.45 22.88 L54.82 18.29 L65.18 13.71 L75.55 15.24 L85.91 10.65 L96.27 12.18 L106.64 6.06 L117 3 L117 32 Z" fill="currentColor" stroke="none"/><path class="lx-sparkline__line" d="M3 29 L13.36 25.94 L23.73 27.47 L34.09 21.35 L44.45 22.88 L54.82 18.29 L65.18 13.71 L75.55 15.24 L85.91 10.65 L96.27 12.18 L106.64 6.06 L117 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="lx-sparkline__point" cx="117" cy="3" r="2.5" fill="currentColor"/></svg><svg class="lx-sparkline" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Backlog with missing days: 8 points, from 30 to 15, low 15, high 30" focusable="false"><path class="lx-sparkline__area" d="M3 32 L3 3 L15.67 6.47 L28.33 4.73 L41 13.4 L41 32 Z M79 32 L79 20.33 L91.67 23.8 L104.33 22.07 L117 29 L117 32 Z" fill="currentColor" stroke="none"/><path class="lx-sparkline__line" d="M3 3 L15.67 6.47 L28.33 4.73 L41 13.4 M79 20.33 L91.67 23.8 L104.33 22.07 L117 29" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="lx-sparkline__point" cx="117" cy="29" r="2.5" fill="currentColor"/></svg><svg class="lx-sparkline" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Flat series: 5 points, from 5 to 5, low 5, high 5" focusable="false"><path class="lx-sparkline__area" d="M3 32 L3 16 L31.5 16 L60 16 L88.5 16 L117 16 L117 32 Z" fill="currentColor" stroke="none"/><path class="lx-sparkline__line" d="M3 16 L31.5 16 L60 16 L88.5 16 L117 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle class="lx-sparkline__point" cx="117" cy="16" r="2.5" fill="currentColor"/></svg><svg class="lx-sparkline" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="No data: no data" focusable="false"><line class="lx-sparkline__empty" x1="0" y1="16" x2="120" y2="16" stroke="currentColor" stroke-dasharray="2 3"/></svg></div></div></section>
+<section class="g-section" id="bar-chart" aria-labelledby="bar-chart-h"><h2 id="bar-chart-h">Bar chart</h2><p class="g-desc">Horizontal bars from a zero baseline, values printed at the bar ends, the same numbers in a table for assistive technology.</p><div class="g-demo"><div class="g-stack g-stack--wide"><figure class="lx-chart"><figcaption class="lx-chart__title">Units shipped by depot, November</figcaption><svg class="lx-chart__svg" viewBox="0 0 480 130" width="480" height="130" aria-hidden="true" focusable="false"><g class="lx-chart__row"><title>North depot: 18.4K</title><rect class="lx-chart__hit" x="0" y="5" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="20" text-anchor="end" dominant-baseline="central">North depot</text><path class="lx-chart__bar" d="M128 10 H412 A4 4 0 0 1 416 14 V26 A4 4 0 0 1 412 30 H128 Z" fill="currentColor"/><text class="lx-chart__value" x="422" y="20" text-anchor="start" dominant-baseline="central">18.4K</text></g><g class="lx-chart__row"><title>East depot: 13K</title><rect class="lx-chart__hit" x="0" y="35" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="50" text-anchor="end" dominant-baseline="central">East depot</text><path class="lx-chart__bar" d="M128 40 H326.63 A4 4 0 0 1 330.63 44 V56 A4 4 0 0 1 326.63 60 H128 Z" fill="currentColor"/><text class="lx-chart__value" x="336.63" y="50" text-anchor="start" dominant-baseline="central">13K</text></g><g class="lx-chart__row"><title>Harbour depot: 9,310</title><rect class="lx-chart__hit" x="0" y="65" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="80" text-anchor="end" dominant-baseline="central">Harbour depot</text><path class="lx-chart__bar" d="M128 70 H269.56 A4 4 0 0 1 273.56 74 V86 A4 4 0 0 1 269.56 90 H128 Z" fill="currentColor"/><text class="lx-chart__value" x="279.56" y="80" text-anchor="start" dominant-baseline="central">9,310</text></g><g class="lx-chart__row"><title>West depot: 2,140</title><rect class="lx-chart__hit" x="0" y="95" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="110" text-anchor="end" dominant-baseline="central">West depot</text><path class="lx-chart__bar" d="M128 100 H157.46 A4 4 0 0 1 161.46 104 V116 A4 4 0 0 1 157.46 120 H128 Z" fill="currentColor"/><text class="lx-chart__value" x="167.46" y="110" text-anchor="start" dominant-baseline="central">2,140</text></g><line class="lx-chart__axis" x1="128" y1="0" x2="128" y2="130" stroke="currentColor"/></svg><table class="lx-sr-only"><thead><tr><th scope="col">Item</th><th scope="col" class="lx-num">Value</th></tr></thead><tbody><tr><th scope="row">North depot</th><td class="lx-num">18.4K</td></tr><tr><th scope="row">East depot</th><td class="lx-num">13K</td></tr><tr><th scope="row">Harbour depot</th><td class="lx-num">9,310</td></tr><tr><th scope="row">West depot</th><td class="lx-num">2,140</td></tr></tbody></table></figure><figure class="lx-chart"><figcaption class="lx-chart__title">Stock change by category, this week</figcaption><svg class="lx-chart__svg" viewBox="0 0 480 130" width="480" height="130" aria-hidden="true" focusable="false"><g class="lx-chart__row"><title>Fasteners: +420</title><rect class="lx-chart__hit" x="0" y="5" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="20" text-anchor="end" dominant-baseline="central">Fasteners</text><path class="lx-chart__bar" d="M246.49 10 H412 A4 4 0 0 1 416 14 V26 A4 4 0 0 1 412 30 H246.49 Z" fill="currentColor"/><text class="lx-chart__value" x="422" y="20" text-anchor="start" dominant-baseline="central">+420</text></g><g class="lx-chart__row"><title>Hand tools: -135</title><rect class="lx-chart__hit" x="0" y="35" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="50" text-anchor="end" dominant-baseline="central">Hand tools</text><path class="lx-chart__bar lx-chart__bar--negative" d="M246.49 40 H196 A4 4 0 0 0 192 44 V56 A4 4 0 0 0 196 60 H246.49 Z" fill="currentColor"/><text class="lx-chart__value" x="186" y="50" text-anchor="end" dominant-baseline="central">-135</text></g><g class="lx-chart__row"><title>Safety wear: +260</title><rect class="lx-chart__hit" x="0" y="65" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="80" text-anchor="end" dominant-baseline="central">Safety wear</text><path class="lx-chart__bar" d="M246.49 70 H347.42 A4 4 0 0 1 351.42 74 V86 A4 4 0 0 1 347.42 90 H246.49 Z" fill="currentColor"/><text class="lx-chart__value" x="357.42" y="80" text-anchor="start" dominant-baseline="central">+260</text></g><g class="lx-chart__row"><title>Adhesives: -60</title><rect class="lx-chart__hit" x="0" y="95" width="480" height="30" fill="transparent"/><text class="lx-chart__label" x="120" y="110" text-anchor="end" dominant-baseline="central">Adhesives</text><path class="lx-chart__bar lx-chart__bar--negative" d="M246.49 100 H226.27 A4 4 0 0 0 222.27 104 V116 A4 4 0 0 0 226.27 120 H246.49 Z" fill="currentColor"/><text class="lx-chart__value" x="216.27" y="110" text-anchor="end" dominant-baseline="central">-60</text></g><line class="lx-chart__axis" x1="246.49" y1="0" x2="246.49" y2="130" stroke="currentColor"/></svg><table class="lx-chart__table"><thead><tr><th scope="col">Item</th><th scope="col" class="lx-num">Value</th></tr></thead><tbody><tr><th scope="row">Fasteners</th><td class="lx-num">+420</td></tr><tr><th scope="row">Hand tools</th><td class="lx-num">-135</td></tr><tr><th scope="row">Safety wear</th><td class="lx-num">+260</td></tr><tr><th scope="row">Adhesives</th><td class="lx-num">-60</td></tr></tbody></table></figure></div></div></section>
+</main>
+</div>
+<footer class="g-footer">Version 1.0.0. Built and maintained by the <a href="https://ligatrix.com">Ligatrix</a> team.</footer>
+<script>document.querySelectorAll("[data-set-theme]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var t = b.getAttribute("data-set-theme");
+    if (t === "system") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+    document.querySelectorAll("[data-set-theme]").forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
+  });
+});</script>
+</body>
+</html>
